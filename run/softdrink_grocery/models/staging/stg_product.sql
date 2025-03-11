@@ -1,0 +1,31 @@
+
+
+  create or replace view `soft-drink-grocery`.`staging`.`stg_product`
+  OPTIONS()
+  as with
+
+source as (
+
+    select * from `soft-drink-grocery`.`raw`.`raw_product_mf`
+
+),
+
+renamend as (
+    select
+        product,
+        upc,
+        CAST(upc as int) as upc_int,
+        vendor,
+        brand,
+        category,
+        subcategory,
+        item_size,
+        item_unit,
+        pack_qty
+    from
+        source
+
+)
+
+select * from renamend;
+
